@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, redirect } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { PublicLayout } from "./layout/PublicLayout";
@@ -14,14 +14,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route Component={PublicLayout}>
-          <Route index path="/" element={<HomePage />} />
+          <Route index exact path="/" element={<HomePage />} />
           <Route path="*" element={<NoPage/>} />
         </Route>
         <Route Component={AuthLayout}>
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/accountPage" element={<AccountPage />} />
-
-          <Route path="*" element={<NoPage/>} />
+          <Route path="/AccountPage" element={<AccountPage />} />       
         </Route>
       </Routes>
     </BrowserRouter>
