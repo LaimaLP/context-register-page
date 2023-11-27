@@ -1,13 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GlobalContext } from "../components/context/GlobalContent";
 import { useContext } from "react";
-
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 
 export function Header() {
 
     const { isLogedIn } = useContext(GlobalContext);
-
+    const [log, setLog] = useState(false);
+    function handleLog(){
+        setLog(!log)
+        navigate('/')
+    }
+const navigate = useNavigate()
     return (
         <div className="container">
             <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
@@ -23,14 +29,17 @@ export function Header() {
 
                 <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                     <li><Link to="/" className="nav-link px-2 link-danger">Home</Link></li>
-                    <li><Link to="/AccountPage" className="nav-link px-2">Account</Link></li>
+                    {!isLogedIn 
+                    ? ""
+                    :( <li><Link to="/AccountPage" className="nav-link px-2">Account</Link></li>)}
                 </ul>
 
                 <div className="col-md-3 text-end">
                 { !isLogedIn 
                         ? ( <Link to="/login" className="btn btn-outline-primary me-2">Login</Link>)
-                        : (<Link to="/login" className="btn btn-outline-primary me-2">Log Out</Link>)
+                        : (<button className="btn btn-outline-primary me-2" onClick={handleLog}>{log? "Login" : "Log out"}</button>)
                 }
+                
                 </div>
             </header>
         </div>

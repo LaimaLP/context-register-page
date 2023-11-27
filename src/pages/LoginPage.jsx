@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { GlobalContext } from "../components/context/GlobalContent";
-import { HomePage } from "./HomePage";
+import { useNavigate } from 'react-router-dom';
+
+
 
 export function LoginPage() {
   const { updateLoginStatus } = useContext(GlobalContext);
@@ -8,8 +10,11 @@ export function LoginPage() {
   function setSignedIn(event) {
     event.preventDefault();
     updateLoginStatus(true);
+    navigate('/')
   }
   const { isLogedIn } = useContext(GlobalContext);
+  const navigate= useNavigate()
+
   return (
    <div className="vh-100">
       <div className=" text-center d-flex align-items-center justify-content-center">
@@ -48,13 +53,7 @@ export function LoginPage() {
               <input type="checkbox" value="remember-me" /> Remember me
             </label>
           </div>
-          <button
-            className="btn btn-lg btn-primary btn-block"
-            type="submit"
-            onClick={setSignedIn}
-          >
-            Sign in
-          </button>
+          <button onClick={setSignedIn} className="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
           <p className="mt-5 mb-3 text-muted">© 2023</p>
         </form>
       </div>
