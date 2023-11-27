@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom';
+import { GlobalContext } from "../components/context/GlobalContent";
+import { useContext } from "react";
+
+
 export function HeaderSimpli() {
-
-
+   
+    const { isLogedIn } = useContext(GlobalContext);
     return (
+
         <div className="container">
             <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
                 <div className="col-md-3 mb-2 mb-md-0">
@@ -20,7 +25,10 @@ export function HeaderSimpli() {
                 </ul>
 
                 <div className="col-md-3 text-end">
-                    <Link to="/login" className="btn btn-outline-primary me-2">Login LogOut</Link>
+                { !isLogedIn 
+                        ? ( <Link to="/login" className="btn btn-outline-primary me-2">Login</Link>)
+                        : (<Link to="/login" className="btn btn-outline-primary me-2">Log Out</Link>)
+                }
                 </div>
             </header>
         </div>

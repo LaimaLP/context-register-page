@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
+import { GlobalContext } from "../components/context/GlobalContent";
+import { useContext } from "react";
+
+
+
 export function Header() {
 
+    const { isLogedIn } = useContext(GlobalContext);
 
     return (
         <div className="container">
@@ -17,11 +23,14 @@ export function Header() {
 
                 <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                     <li><Link to="/" className="nav-link px-2 link-danger">Home</Link></li>
-                    <li><Link to="/" className="nav-link px-2">Account</Link></li>
+                    <li><Link to="/AccountPage" className="nav-link px-2">Account</Link></li>
                 </ul>
 
                 <div className="col-md-3 text-end">
-                    <Link to="/login" className="btn btn-outline-primary me-2">Login</Link>
+                { !isLogedIn 
+                        ? ( <Link to="/login" className="btn btn-outline-primary me-2">Login</Link>)
+                        : (<Link to="/login" className="btn btn-outline-primary me-2">Log Out</Link>)
+                }
                 </div>
             </header>
         </div>
