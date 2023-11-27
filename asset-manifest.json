@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/context-register-page/static/css/main.1142b383.css",
+    "main.js": "/context-register-page/static/js/main.fe92f638.js",
+    "index.html": "/context-register-page/index.html",
+    "main.1142b383.css.map": "/context-register-page/static/css/main.1142b383.css.map",
+    "main.fe92f638.js.map": "/context-register-page/static/js/main.fe92f638.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1142b383.css",
+    "static/js/main.fe92f638.js"
+  ]
+}
