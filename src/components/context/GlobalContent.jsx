@@ -18,7 +18,6 @@ export function ContextWrapper(props) {
     const value = {
         isLogedIn,
         updateLoginStatus,
-        testas:"testas",
     };
 
     return (

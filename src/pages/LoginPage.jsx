@@ -1,24 +1,35 @@
 import { useContext } from "react";
 import { GlobalContext } from "../components/context/GlobalContent";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
-
-export function LoginPage() {
+export function LoginPage(registerUser) {
   const { updateLoginStatus } = useContext(GlobalContext);
 
   function setSignedIn(event) {
     event.preventDefault();
     updateLoginStatus(true);
-    navigate('/')
+    navigate("/");
   }
   const { isLogedIn } = useContext(GlobalContext);
-  const navigate= useNavigate()
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState([]);
+  const [password, setPassword] = useState([]);
+
+  function handleRegistration(event) {
+    event.preventDefault();
+    registerUser({
+      email: email,
+      password: password,
+    });
+  }
 
   return (
-   <div className="vh-100">
+    <div className="vh-100">
       <div className=" text-center d-flex align-items-center justify-content-center">
-        <form className="form-signin col-4">
+        <form onSubmit={handleRegistration} className="form-signin col-4">
           <img
             className="mb-4"
             src="https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg"
@@ -31,33 +42,42 @@ export function LoginPage() {
             Email address
           </label>
           <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
             type="email"
             id="inputEmail"
             className="form-control"
             placeholder="Email address"
-            required=""
-            autofocusname=""
+            required
           />
+
           <label htmlFor="inputPassword" className="sr-only">
             Password
           </label>
           <input
+          value={password}
+          onChange={(e)=>setPassword(e.target.value)}
             type="password"
             id="inputPassword"
             className="form-control"
             placeholder="Password"
-            required=""
+            required
           />
           <div className="checkbox mb-3">
             <label>
               <input type="checkbox" value="remember-me" /> Remember me
             </label>
           </div>
-          <button onClick={setSignedIn} className="btn btn-lg btn-primary btn-block" type="submit" >Sign in</button>
+          <button
+            onClick={setSignedIn}
+            className="btn btn-lg btn-primary btn-block"
+            type="submit"
+          >
+            Sign in
+          </button>
           <p className="mt-5 mb-3 text-muted">© 2023</p>
         </form>
       </div>
     </div>
-  
-    );
+  );
 }
