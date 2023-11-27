@@ -3,33 +3,53 @@ import { GlobalContext } from "../components/context/GlobalContent";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-
 export function LoginPage(registerUser) {
-  const { updateLoginStatus } = useContext(GlobalContext);
+  const registeredUsers = [
+    { email: "laima@laima", password: "laima" },
+    { email: "pi@pi", password: "pipi" },
+  ];
 
-  function setSignedIn(event) {
+  const [email, setEmail] = useState("");
+
+
+  const [password, setPassword] = useState("");
+
+  const { updateLoginStatus } = useContext(GlobalContext);
+  const navigate = useNavigate();
+
+ function handleSignedIn(event) {
     event.preventDefault();
+   if( validateUser() ){
+    updateLoginStatusAndNavigate()
+   }else{
+    alert("Wrong, try again.")
+   }
+  }
+
+
+function validateUser(){
+  let isUserValid = false
+  for(const item of registeredUsers){
+    if(item.email === email && item.password === password){
+      isUserValid = true
+    }
+  }
+  return  isUserValid
+}
+
+
+  function updateLoginStatusAndNavigate() {
     updateLoginStatus(true);
     navigate("/");
   }
-  const { isLogedIn } = useContext(GlobalContext);
-  const navigate = useNavigate();
 
-  const [email, setEmail] = useState([]);
-  const [password, setPassword] = useState([]);
 
-  function handleRegistration(event) {
-    event.preventDefault();
-    registerUser({
-      email: email,
-      password: password,
-    });
-  }
 
-  return (
+ 
+return (
     <div className="vh-100">
       <div className=" text-center d-flex align-items-center justify-content-center">
-        <form onSubmit={handleRegistration} className="form-signin col-4">
+        <form className="form-signin col-4">
           <img
             className="mb-4"
             src="https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg"
@@ -42,8 +62,8 @@ export function LoginPage(registerUser) {
             Email address
           </label>
           <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             id="inputEmail"
             className="form-control"
@@ -55,8 +75,8 @@ export function LoginPage(registerUser) {
             Password
           </label>
           <input
-          value={password}
-          onChange={(e)=>setPassword(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             type="password"
             id="inputPassword"
             className="form-control"
@@ -69,7 +89,7 @@ export function LoginPage(registerUser) {
             </label>
           </div>
           <button
-            onClick={setSignedIn}
+            onClick={handleSignedIn}
             className="btn btn-lg btn-primary btn-block"
             type="submit"
           >

@@ -1,11 +1,18 @@
-import { Link } from 'react-router-dom';
+
 import { GlobalContext } from "../components/context/GlobalContent";
 import { useContext } from "react";
-
+import { Link, useNavigate } from "react-router-dom";
 
 export function HeaderSimpli() {
+        const navigate = useNavigate();
+       const { isLogedIn, updateLoginStatus } = useContext(GlobalContext);
+       
+        function handleLogOut() {
+          updateLoginStatus(false);
+          navigate("/");
+        }
+      
    
-    const { isLogedIn } = useContext(GlobalContext);
     return (
 
         <div className="container">
@@ -25,11 +32,19 @@ export function HeaderSimpli() {
                 </ul>
 
                 <div className="col-md-3 text-end">
-                { !isLogedIn 
-                        ? ( <Link to="/login" className="btn btn-outline-primary me-2">Login</Link>)
-                        : (<Link to="/login" className="btn btn-outline-primary me-2">Log Out</Link>)
-                }
-                </div>
+          {!isLogedIn ? (
+            <Link to="/login" className="btn btn-outline-primary me-2">
+              Login
+            </Link>
+          ) : (
+            <button
+              className="btn btn-outline-primary me-2"
+              onClick={handleLogOut}
+            >
+              Log Out
+            </button>
+          )}
+        </div>
             </header>
         </div>
     );

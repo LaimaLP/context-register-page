@@ -1,5 +1,4 @@
-// import { GlobalContext } from "../components/context/GlobalContent";
-// import { useContext } from "react";
+
 
 export function NoPage() {
   return (

@@ -13,10 +13,10 @@ export function AccountPage() {
                 short so folks don't simply skip over it entirely.
               </p>
               <p>
-                <a href="/nopage" className="btn btn-primary my-2">
+                <a  className="btn btn-primary my-2">
                   Main call to action
                 </a>
-                <a href="/nopage" className="btn btn-secondary my-2">
+                <a  className="btn btn-secondary my-2">
                   Secondary action
                 </a>
               </p>

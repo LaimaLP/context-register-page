@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, redirect } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { PublicLayout } from "./layout/PublicLayout";
@@ -9,6 +9,8 @@ import { ContextWrapper } from './components/context/GlobalContent';
 import { AccountPage } from "./pages/AccountPage";
 
 function App() {
+
+
   return (
     <ContextWrapper>
     <BrowserRouter>
@@ -28,18 +30,3 @@ function App() {
 }
 
 export default App;
-
-//   <BrowserRouter>
-//   <Routes>
-//     <Route Component={PublicLayout}>
-//       <Route index path="/" element={<HomePage />} />
-//       <Route Component={AccountLayout}>
-//         <Route path="/account/"{user} element={<UserPage account={user} />} />
-//       </Route>
-//       <Route path='*' element={<NoPage />} />
-//     </Route>
-//     <Route Component={AuthLayout}>
-//       <Route path="/login" element={<Login />} />
-//     </Route>
-//   </Routes>
-// </BrowserRouter>
